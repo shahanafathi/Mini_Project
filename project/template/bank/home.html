@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="B-home.css"> -->
+</head>
+<body>
+    <img src="bank.png" alt="bank" style="height: 1024px; width:482px;">
+    <nav>
+       <nav>
+         <ul>     
+                <li>
+                <a href="{% url 'viewuser' %}">view user</a>
+                </li>
+                <li>
+                <a href="{% url 'logout' %}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8m-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5"/>
+                </svg></a>
+                </li>
+                
+        </ul>
+    </nav>
+    {% block content %}
+    <div>
+        <img src="home1.png" alt="bank" style="height: 1024px; width:482px;">
+    </div>
+    <div>
+        <p>Number of users:</p>
+        <p> {{data3}}</p>
+    </div>
+    <div> <img src="home1.png" alt="bank" style="height: 1024px; width:482px;"></div>
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,47 @@
+
+{% extends 'user/home.html' %}
+{% block content %}
+
+    <form action="{% url 'profileedit' id=datas.id %}" method="POST">
+        {% csrf_token %}
+        <h3>Register</h3>
+        <label for="name"><b>Name</b></label>
+        <input type="text" placeholder="Name" name="Name" value="{{datas.first_name}}" >
+
+        <label for="DOB"><b>UserName</b></label>
+        <input type="text" placeholder="UserName" name="UserName" value="{{datas.username}}" ><br>
+
+        <label for="Email"><b>Email</b></label>
+        <input type="email" placeholder="Email" name="Email" value="{{ datas.email }}">
+
+        <label for="DOB"><b>DOB</b></label>
+        <input type="date" placeholder="DOB" id="DOB" name='DOB' value="{{datas.DOB}}"><br>
+
+        <label for="Address"><b><Address></Address></b></label>
+        <textarea id="Address" name="Address" rows="4" cols="50" >{{datas.Address}}</textarea>
+
+        <label for="Phone number"><b>Phone number</b></label>
+        <input type="tel" placeholder="Phone number"  name='Phonenumber' value="{{datas.Phonenumber}}"><br>
+
+        <label for="Age"><b>Age</b></label>
+        <input type="number" placeholder="Age" name='age' value="{{datas.age}}">
+
+
+        <label for="Pancard no"><b>Pancard no</b></label>
+        <input type="text" placeholder="Pancard no" pattern="[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}" name='Pancardno' value="{{datas.Pancardno}}"><br>
+
+
+        <label for="name"><b>Adhar Number</b></label>
+        <input type="text" placeholder="Adhar Number"  maxlength="14" name='AdharNumber' value="{{datas.AdharNumber}}"><br>
+
+
+        <label for="Image"><b>Image</b></label>
+                    <a><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-image-fill" viewBox="0 0 16 16">
+                      <path d="M4 0h8a2 2 0 0 1 2 2v8.293l-2.73-2.73a1 1 0 0 0-1.52.127l-1.889 2.644-1.769-1.062a1 1 0 0 0-1.222.15L2 12.292V2a2 2 0 0 1 2-2m4.002 5.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0"/>
+                      <path d="M10.564 8.27 14 11.708V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-.293l3.578-3.577 2.56 1.536 2.426-3.395z"/>
+                    </svg><input type="file" name="Image"  value="{{datas.Image}}"></a>
+        
+        <button type="submit">Update</button>
+
+    </form>    
+{% endblock %}

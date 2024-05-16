@@ -1,0 +1,162 @@
+body{
+    background-color: rgb(255, 255, 255);
+   
+}
+.abc{
+    display:inline-flex; 
+}
+.a{
+    float: inline;
+}
+.b{
+    float: inline ;
+    margin-left: 30px;
+}
+.container {
+
+    background-color: #87B4A6;
+    width:900px;
+    height: 700px;
+    padding-top: 0px; 
+    margin-right: 30px; 
+    margin-top:5px; 
+    margin-bottom:20px; 
+    border-radius: 20px;
+    box-sizing: border-box;
+    align-items: center; 
+    border: none;
+}
+
+
+.container:hover {
+    border: #26f5e4;
+}
+
+.abc1{
+    display:inline-flex; 
+    justify-content: center;
+    padding-top: 25px;
+    padding-left:25px;
+}
+
+.a1{
+    float: inline-start;
+    margin-left:60px;
+}
+.a2{
+    float: inline-end ;
+    margin-left:40px;
+    margin-right :70px;
+
+}
+/* .form {
+    width: 30px; 
+    text-align: center;
+    justify-items: center;
+    margin-left: 0px;
+    padding-left: 0px;
+} */
+
+h3 {
+    font-family: 'Inknut Antiqua'; 
+    font-size:xx-large; 
+    font: weight 400px;;
+    text-align:center;
+    margin-left:50px;
+}
+
+p{
+    font-size:medium;
+    text-decoration:border; 
+    text-align:center;
+    margin-left:50px;
+    margin-top:10px;
+
+}
+.container input[type="text"]{
+    width: 100%; 
+    padding: 10px;
+    margin: 5px 0 15px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing:content-box;
+    border-bottom:2px;
+    margin-bottom:20px;
+    border-left: none;
+   
+}
+.container input[type="email"]{
+    width: 110%; 
+    padding: 10px;
+    margin: 5px 0 15px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing:content;
+    border-bottom:2px;
+    margin-bottom:20px;
+    border-left: none;
+  
+}
+.container input[type="number"]{
+    width: 110%; 
+    padding: 10px;
+    margin: 5px 0 15px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing:content;
+    border-bottom:2px;
+    border-left: none;
+    margin-bottom:20px;
+}
+.container input[type="file"]{
+    width: 100%; 
+    margin-bottom:20px;
+    padding: 10px;
+    margin: 5px ;
+    border:none;
+    border-radius: 5px;
+    box-sizing:content;
+    border-bottom:2px;
+    border-left: none;
+}
+.container input[type="date"]{
+    width: 110%; 
+    padding: 10px;
+    margin: 5px ;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing:content;
+    border-bottom:2px;
+    border-left: none;
+}
+.container input[type="password"] {
+    width:110%; 
+    padding: 10px;
+    margin: 5px 0 15px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing:content;
+    border-bottom:2px;
+    border-left: none;
+    
+}
+
+.container button {
+    justify-content: center;
+    text-align: center;
+    width: 150px;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #000;
+    cursor: pointer;
+    margin-left:400px;
+    margin-top: 80px;
+
+}
+
+.container button:hover {
+    opacity: 0.8;
+}

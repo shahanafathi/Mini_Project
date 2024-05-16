@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+
+    </nav>
+    <div>
+        <img src="girl.png" alt="profile" >
+
+        <table>
+            <tr>
+                <th>SLNO</th>
+                <th>Dateandtime</th>
+                <th>Details</th>
+                <th>Amount</th>
+                <th>Balance</th>
+            </tr>
+            {% for i in data %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.dateandtime }}</td>
+                <td>{{ i.details }}</td>
+                <td>{{ i.amount }}</td>
+                <td>{{ i.balance }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+{% extends 'user/home.html' %}
+{% block content %}
+<div>
+    <form action="{% url 'deposite' %}" method="POST">
+        {% csrf_token %}
+    <label for="Account Numnber"><b>Account Number</b></label><br>
+    <p>{{  data.AccountNumber}}</p>
+
+    <label for="Branch"><b>Branch</b></label><br>
+        <p>{{data.Branch}}</p>
+
+        <label for="Amount"><b>Amount</b></label><br>
+        <input type="text" placeholder="amount" name="amount" ><br> 
+        <button type="submit">deposit</button>
+    </form>
+</div>
+
+
+
+
+
+
+{% endblock %}

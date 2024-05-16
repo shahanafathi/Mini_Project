@@ -1,0 +1,27 @@
+{% extends 'user/home.html' %}
+{% block content %}
+<div>
+    <form action="{% url 'withdraw' %}" method="POST">
+        {% csrf_token %}
+            <label for="Account Numnber"><b>Account Number</b></label><br>
+            <p>{{ data.AccountNumber}}</p>
+
+            <label for="Branch"><b>Branch</b></label><br>
+            <p>{{data.Branch}}</p>
+
+            <label for="InitialAmount"><b>InitialAmount</b></label><br>
+            <p>{{data.InitialAmount}}</p>
+            
+            <label for="Amount"><b>Amount</b></label><br>
+            <input type="text" placeholder="amount" name="amount" ><br> 
+            <button type="submit">withdraw</button>
+        <!-- 
+            <label for="InitialAmount"><b>InitialAmount</b></label><br>
+            <p>{{data.InitialAmount}}</p>
+
+            <label for="balance"><b>balance</b></label><br>
+            <p>{{data.balance}}</p> -->
+    </form>
+
+</div>
+{% endblock %}

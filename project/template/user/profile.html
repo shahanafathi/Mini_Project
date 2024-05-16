@@ -1,0 +1,17 @@
+{% extends 'user/home.html' %}
+{% block content %}
+
+    <div>
+        {{data.Email}}
+        {{data.UserName}}
+        {{ data.Address }}
+        {{ data.DOB }}
+        {{ data.age }}
+        {{data.Phonenumber}}
+        {{data.AdharNumber}}
+        {{data.Pancardno}}
+        <img src="{{data.Image.url}}" alt="">
+        <a href="{% url 'profileedit' id=data.id %}"> edit<i class="bi bi-pencil-square"></i></a>
+    </div>
+
+    {% endblock %}

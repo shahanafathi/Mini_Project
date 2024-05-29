@@ -5,6 +5,7 @@ from .models import CustomeUser,transaction
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 # from django.contrib.auth.hashers import make_password
 
 
@@ -31,6 +32,8 @@ def Login(request):
                 return redirect(userhome)
             elif user.usertype == "bank":   #agency profile
                 return redirect(bankhome)
+            # elif user.usertype=="admin":
+            #    return HttpResponse('homepage sucess')
             return render(request, 'login.html', context)
         else:
             context = {
@@ -127,27 +130,30 @@ def deposite(request):
         amount = request.POST['amount']
         data.InitialAmount+=int(amount)
         data.save()
-        a = transaction.objects.create(user_id=data,details='Deposit',amount=amount,balance=data.InitialAmount)
+        a = transaction.objects.create(user_id=data,details='Deposit', amount=amount,balance=data.InitialAmount)
         a.save()
         return redirect(userhome)
     else:
-        return render(request,'user/deposit.html',{'data':data})
+        data1=CustomeUser.objects.get(usertype='bank')
+        return render(request,'user/deposit.html',{'data':data,'datas':data1})
     
 def withdraw(request):
+    datas=CustomeUser.objects.get(usertype='bank')
     data1=CustomeUser.objects.get(id=request.user.id)
     if request.method=='POST':
         amount = int(request.POST.get('amount')) 
         # if amount<=0:
         #     return HttpResponse('invalid')
         if data1.InitialAmount <= amount or data1.InitialAmount-amount<1000:
-            return HttpResponse('insufficient balance')
+            context={'message':'insufficient balance'}
+            return render(request,'user/withdraw.html',context)
         data1.InitialAmount-=amount
         data1.save()
-        a=transaction.objects.create(user_id=data1,details='withdraw',amount=amount,balance=data1.InitialAmount)
+        a=transaction.objects.create(user_id=data1,details='Withdrawel',amount=amount,balance=data1.InitialAmount)
         a.save()
         return redirect(userhome)
     else:
-        return render(request,'user/withdraw.html',{'data':data1})
+        return render(request,'user/withdraw.html',{'data':data1,'datas':datas})
     
 def viewhistory(request):
     datas = transaction.objects.filter(user_id=request.user.id)
@@ -192,8 +198,105 @@ def bankuserprofile(request,id):
     
 def userhistory(request,id):
     datas = transaction.objects.filter(user_id=id)
-    return render(request,'bank/profilehistory.html',{'data':datas})
+    users= CustomeUser.objects.get(id=id)
+    return render(request,'bank/profilehistory.html',{'data':datas,'user':users})
    
 def logout(request):
     auth.logout(request)
     return redirect(Login)
+
+
+# Admin.............................................
+
+
+def admregstr(request):
+    if request.method=='POST':
+        name=request.POST['name'] 
+        Username=request.POST['UserName']
+        Email=request.POST['Email']
+        Address=request.POST['Address']
+        pincode=request.POST['pincode']
+        Password=request.POST['Password']
+        ifsc=request.POST['ifsc']
+        branch=request.POST['branch']
+        data1=CustomeUser.objects.create_user(first_name=name,email=Email,Ifsc=ifsc,Branch=branch,Address=Address,Pincode=pincode,username=Username,password=Password,usertype='admin')
+        data1.save()
+        return redirect(Login)
+    else:
+        return render(request,'admin/bankreg.html')
+        # return HttpResponse('sucess')
+
+
+
+# def admregstr(request):
+#     if request.method == 'POST':
+#         name = request.POST['name']
+#         username = request.POST['UserName']
+#         email = request.POST['Email']
+#         address = request.POST['Address']
+#         pincode = request.POST['pincode']
+#         password = request.POST['Password']
+#         ifsc = request.POST['ifsc']
+#         branch = request.POST['branch']
+        
+#         CustomUser = get_user_model()
+#         data1 = CustomUser.objects.create_user(
+#             first_name=name,
+#             email=email,
+#             Ifsc=ifsc,
+#             Branch=branch,
+#             Address=address,
+#             Pincode=pincode,
+#             username=username,
+#             password=password,
+#             usertype='admin'
+#         )
+#         data1.save()
+#         return redirect('login') 
+#     else:
+#         # return render(request, 'admin/bankreg.html')
+#         return HttpResponse('sucess')
+
+
+def admregstr(request):
+    if request.method == 'POST':
+        Username = request.POST['UserName']
+        Email = request.POST['Email']
+        
+        if CustomeUser.objects.filter(username=Username).exists():
+            return render(request, 'admin/bankreg.html', {'error': 'Username already exists'})
+        if CustomeUser.objects.filter(email=Email).exists():
+            return render(request, 'admin/bankreg.html', {'error': 'Email already exists'})
+        
+        name = request.POST['name']
+        age = request.POST['Age']
+        Image = request.FILES.get('Image')
+        AccountNumber = request.POST['AccountNumber']
+        dob = request.POST['DOB']
+        Address = request.POST['Address']
+        pincode = request.POST['Pincode']
+        Pancardno = request.POST['Pancardno']
+        Adharnumber = request.POST['AdharNumber']
+        Phonenumber = request.POST['Phonenumber']
+        InitialAmount = request.POST.get('InitialAmount', 0)  # Default to 0 if not provided
+        
+        data1 = CustomeUser.objects.create_user(
+            first_name=name,
+            age=age,
+            email=Email,
+            Image=Image,
+            AccountNumber=AccountNumber,
+            DOB=dob,
+            Address=Address,
+            Pincode=pincode,
+            Pancardno=Pancardno,
+            AdharNumber=Adharnumber,
+            Phonenumber=Phonenumber,
+            InitialAmount=InitialAmount,
+            username=Username,
+            password=request.POST['Password'],
+            usertype='admin'
+        )
+        data1.save()
+        return redirect('login')
+    return render(request, 'admin/bankreg.html')

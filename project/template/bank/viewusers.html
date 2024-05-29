@@ -1,26 +1,141 @@
-{% extends 'bank/profileview.html' %}
-{% block content %}
-<form action="{% url 'search' %}" method="post">
-    {% csrf_token %}
-    <input type="search" name="search" id="">
-    <button type="submit">Search</button>
-</form>
-<a href="{% url 'all' %}"><button>all</button></a>
-<table>
-    <tr>
-        <th>image</th>
-        <th>name</th>
-        <th></th>
-        <th></th>
-    </tr>
-    {% for i in users%}
-    <tr>
-        <td><img src="{{i.Image.url}}" alt="" width="50px" height="50px" style="border-radius: 50%;"></td>
-        <td>{{i.first_name}}</td>
-        <td><a href="{% url 'bankuserprofile'  id=i.id %}"><button>view</button></a></td>
-        <td><a href="{% url 'userhistory'  id=i.id %}"><button>history</button></a></td>
-    </tr>
-   
-</table>
-{% endfor%}
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin:0px;
+        padding:0px;
+    }
+  
+    .navbar{
+        background-color: #87B4A6;
+        height: 60px;
+    }
+
+</style>
+<body>
+    <nav class="navbar bg-body-tertiary navbar-expand style">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarNav">
+             
+            </div>
+          </div>
+      </nav>
+    {% block content %}
+    <div class="row">
+        <div class="col-sm-3  " style=" padding-right: 5px;">
+            <img src="{% static 'images/Rectangle 1.png' %}" alt="bank" style="height: 740px;">
+        </div>
+        <div class="col-sm-9">
+            <div class="container-fluid">
+                <div class="row1 ">
+                        <div class="col-sm-3 " style="width:100%;">
+                            <form action="{% url 'search' %}" method="post">
+                            {% csrf_token %}
+
+                        </div>
+                    </div>
+    
+                    <div class="col-sm-3">
+                        <input type="search"  placeholder="Search user by Name" name="search" >
+                        <input type="submit" value="search">
+                    </div>
+                <!-- <a href="{% url 'all' %}"><button>all</button></a> -->
+                </form>
+            </div>
+                <table>
+                    <tr>
+                        <th>image</th>
+                        <th>User name</th>
+                        <th>View more</th>
+                        <th>View history</th>
+                    </tr>
+
+                    {% for i in users %}
+                    <tr>
+                        <td><img src="{{i.Image.url}}" alt="" width="50px" height="50px" style="border-radius: 50%;"></td>
+                        <td>{{i.first_name}}</td>
+                        <td></td>
+                        <td><a href="{% url 'bankuserprofile'  id=i.id %}"><button>view</button></a>
+                        <a href="{% url 'userhistory'  id=i.id %}"><button>history</button></a></td>
+                    </tr>
+                    {% endfor%}
+                   
+                </table>
+                
+                
+            
+        </div>
+
+
+
+    </div>
+     <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        input[type="search"]{
+            padding:10px;
+            border-top-color:transparent ;
+            border-left-color: transparent;
+            border-right-color:transparent ;
+            border-radius: 5px;
+            color: black;
+            height: 30px;
+            background-image: url("{% static 'images/search.png' %}");
+            background-repeat:no-repeat;
+            background-size:cover;
+            background-attachment: fixed;
+          
+        }
+        .row{
+            display:flex;
+           margin-left:0px;
+
+        }
+        .row1{
+            
+            display:flex;
+            
+
+        }
+        button {
+            width: 90px; 
+            text-align: center;
+            align-items: center;
+            height: 30px;
+            border-radius:20px;
+            background-color: #D9D9D9;
+        }
+        .container-fluid{
+            width:500%;
+         
+            margin-top: 10px;
+        }
+        table{
+            justify-content: center;
+            width:1000px;
+
+        }
+        th{
+            margin-left:10px;
+            padding-right:100px;
+            text-align: left;
+        }
+        td{
+            padding-top:20px;
+           margin-right:170px;
+           
+        }
+
+     </style>
+    {% endblock %}
+     
+</body>
+</html>

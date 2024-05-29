@@ -1,27 +1,71 @@
 {% extends 'user/home.html' %}
 {% block content %}
-<div>
+<div  class="container">
     <form action="{% url 'withdraw' %}" method="POST">
         {% csrf_token %}
+        <h3>Withdrawel</h3>
             <label for="Account Numnber"><b>Account Number</b></label><br>
             <p>{{ data.AccountNumber}}</p>
 
             <label for="Branch"><b>Branch</b></label><br>
-            <p>{{data.Branch}}</p>
+            <p>{{datas.Branch}}</p>
 
             <label for="InitialAmount"><b>InitialAmount</b></label><br>
             <p>{{data.InitialAmount}}</p>
-            
+            <p>{{ message }}</p>
             <label for="Amount"><b>Amount</b></label><br>
             <input type="text" placeholder="amount" name="amount" ><br> 
-            <button type="submit">withdraw</button>
-        <!-- 
-            <label for="InitialAmount"><b>InitialAmount</b></label><br>
-            <p>{{data.InitialAmount}}</p>
-
-            <label for="balance"><b>balance</b></label><br>
-            <p>{{data.balance}}</p> -->
+            <button type="submit">Withdraw</button>
+         
+            
+            
+            <!-- <label for="balance"><b>balance</b></label><br> -->
+            <p>{{data.balance}}</p> 
+            
     </form>
 
 </div>
+
+<style>
+    .container{
+        background-color: #87b4a6;
+        width:400px;
+        height:600px; 
+        padding-top:40px;
+        font-size:larger;
+        margin-top:30px;
+        margin-left: 30px;
+        border-radius: 20px; 
+    }
+    h3{
+        font-weight: bolder;
+        margin-bottom:30px;
+        color: black;
+        text-align: center;
+   
+    }
+    input[type="text"]{
+        padding: 5px;
+        width: 50%; 
+        background-color: transparent;
+        border-top-color:transparent ;
+        border-left-color: transparent;
+        border-right-color:transparent ;
+        border-radius: 5px;
+      
+    }
+    button {
+        padding: auto;
+        width: 100px; 
+        text-align: center;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 20px;
+        border-bottom:2px;
+        background-color: #D9D9D9;
+        margin-top:50px;
+        margin-left :120px;
+    }
+</style>
+
 {% endblock %}

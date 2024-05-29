@@ -1,47 +1,156 @@
 
 {% extends 'user/home.html' %}
 {% block content %}
-
+<div class="container">
     <form action="{% url 'profileedit' id=datas.id %}" method="POST">
         {% csrf_token %}
-        <h3>Register</h3>
-        <label for="name"><b>Name</b></label>
-        <input type="text" placeholder="Name" name="Name" value="{{datas.first_name}}" >
+        <h3>Edit Profile</h3>
+        <div class="row d-flex align-items-center ">
+            <div class=" col-sm-6  " style=" padding-right:1px;padding-left:0px;">
+                  <label for="name"><b>Name</b></label><br>
+                  <input type="text" placeholder="Name" name="Name" value="{{datas.first_name}}"  ><br>
 
-        <label for="DOB"><b>UserName</b></label>
-        <input type="text" placeholder="UserName" name="UserName" value="{{datas.username}}" ><br>
+                  <label for="Email"><b>Email</b></label><br>
+                  <input type="email" placeholder="Email" name="Email" value="{{ datas.email }}"><br>
 
-        <label for="Email"><b>Email</b></label>
-        <input type="email" placeholder="Email" name="Email" value="{{ datas.email }}">
+                  <label for="Address"><b><Address></Address></b></label><br>
+                  <textarea id="Address" name="Address" rows="3" cols="18" >{{datas.Address}}</textarea><br>
 
-        <label for="DOB"><b>DOB</b></label>
-        <input type="date" placeholder="DOB" id="DOB" name='DOB' value="{{datas.DOB}}"><br>
+                  <label for="Age"><b>Age</b></label><br>
+                  <input type="number" placeholder="Age" name='age' value="{{datas.age}}"><br>
 
-        <label for="Address"><b><Address></Address></b></label>
-        <textarea id="Address" name="Address" rows="4" cols="50" >{{datas.Address}}</textarea>
+                  <label for="Adhar Number"><b>Adhar Number</b></label><br>
+                  <input type="text" placeholder="Adhar Number"  maxlength="14" name='AdharNumber' value="{{datas.AdharNumber}}"><br>
+            </div>
+            <div class="col-sm-6 " >
+                <label for="UserName"><b>UserName</b></label><br>
+                <input type="text" placeholder="UserName" name="UserName" value="{{datas.username}}" ><br>
+                <label for="DOB"><b>DOB</b></label><br>
+                <input type="date" placeholder="DOB" id="DOB" name='DOB' value="{{datas.DOB}}"><br>
+                <label for="Phone number"><b>Phone number</b></label><br>
+                <input type="tel" placeholder="Phone number"  name='Phonenumber' value="{{datas.Phonenumber}}"><br>
+                <label for="Pancard no"><b>Pancard no</b></label><br>
+                <input type="text" placeholder="Pancard no" pattern="[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}" name='Pancardno' value="{{datas.Pancardno}}"><br>
+                <label for="Image"><b>Image</b></label><br>
+                <a><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-image-fill" viewBox="0 0 16 16">
+                  <path d="M4 0h8a2 2 0 0 1 2 2v8.293l-2.73-2.73a1 1 0 0 0-1.52.127l-1.889 2.644-1.769-1.062a1 1 0 0 0-1.222.15L2 12.292V2a2 2 0 0 1 2-2m4.002 5.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0"/>
+                  <path d="M10.564 8.27 14 11.708V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-.293l3.578-3.577 2.56 1.536 2.426-3.395z"/>
+                </svg><input type="file" name="Image"  value="{{datas.Image}}"></a>
+              </div>
+              <div>
+              <button type="submit">Update</button>
+              </div>
+      </div>
+         </form>  
+       
+  </div>
+  <style>
+    .container{
+      background-color: #87b4a6;
+      width: 700px;
+      height: 670px; 
+      margin-top: 20px;
+      margin-left: 20px;
+      border-radius: 20px;
+      align-items: center;
+    }
+    form{
+      border-radius: 20px ;
+      padding-top: 30px;
+  }
+  h3 {
+      
+      font-weight: bolder;
+      text-align: center;
+      margin-left:30px;
+      margin-top:10px;
+  }
+  label{
+    font-weight: 400;
+    margin-top:10px;
+  }
+  .row{
+    text-align:start;
+    font-size:large;
+    margin-top:40px;
+    margin-left: 20px;
+    
+ }
+  
+    input[type="text"]{
+      padding: 5px;
+      width: 50%; 
+      background-color:white;
+      border-top-color:white ;
+      border-left-color: white;
+      border-right-color:white ;
+      border-radius: 5px;
+      color: black;
+      margin-bottom: 10px;
+    
+  }
+  input[type="number"]{
+      padding: 5px;
+      width: 50%; 
+      background-color: white;
+      border-top-color:white ;
+      border-left-color: white;
+      border-right-color:white ;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    
+  }
+  input[type="email"]{
+      padding:5px;
+      width: 50%; 
+      background-color: white;
+      border-top-color:white ;
+      border-left-color: white;
+      border-right-color:white ;
+      border-radius: 5px; 
+      margin-bottom: 10px;
+  }
+  input[type="date"]{
+      padding: 5px;
+      width: 50%; 
+      background-color: white;
+      border-top-color:white ;
+      border-left-color: white;
+      border-right-color:white ;
+      border-radius: 5px; 
+      margin-bottom: 10px;
+  }
+  input[type="file"]{
+      padding: 5px;
+      width: 50%; 
+      background-color: white;
+      border-top-color:white ;
+      border-left-color: white;
+      border-right-color:white ;
+      border-radius: 5px; 
+      margin-bottom: 10px;
+  }
+  textarea[type="text"]{
+      padding:5px;
+      background-color: transparent;
+      border-top-color:black ;
+      border-left-color: black;
+      border-right-color:black ;
+      border-radius: 5px; 
+      margin-top:15px;
+      margin-bottom: 10px;
+  }
+button{
+    width: 100px;
+    text-align: center;
+    padding: 10px;
+    margin-left: 190px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    background-color: #D9D9D9;
+}
+    
 
-        <label for="Phone number"><b>Phone number</b></label>
-        <input type="tel" placeholder="Phone number"  name='Phonenumber' value="{{datas.Phonenumber}}"><br>
 
-        <label for="Age"><b>Age</b></label>
-        <input type="number" placeholder="Age" name='age' value="{{datas.age}}">
-
-
-        <label for="Pancard no"><b>Pancard no</b></label>
-        <input type="text" placeholder="Pancard no" pattern="[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}" name='Pancardno' value="{{datas.Pancardno}}"><br>
-
-
-        <label for="name"><b>Adhar Number</b></label>
-        <input type="text" placeholder="Adhar Number"  maxlength="14" name='AdharNumber' value="{{datas.AdharNumber}}"><br>
-
-
-        <label for="Image"><b>Image</b></label>
-                    <a><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-image-fill" viewBox="0 0 16 16">
-                      <path d="M4 0h8a2 2 0 0 1 2 2v8.293l-2.73-2.73a1 1 0 0 0-1.52.127l-1.889 2.644-1.769-1.062a1 1 0 0 0-1.222.15L2 12.292V2a2 2 0 0 1 2-2m4.002 5.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0"/>
-                      <path d="M10.564 8.27 14 11.708V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-.293l3.578-3.577 2.56 1.536 2.426-3.395z"/>
-                    </svg><input type="file" name="Image"  value="{{datas.Image}}"></a>
-        
-        <button type="submit">Update</button>
-
-    </form>    
+  </style>
 {% endblock %}

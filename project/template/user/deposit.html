@@ -1,23 +1,60 @@
 {% extends 'user/home.html' %}
 {% block content %}
-<div>
+<div class="container">
     <form action="{% url 'deposite' %}" method="POST">
         {% csrf_token %}
-    <label for="Account Numnber"><b>Account Number</b></label><br>
-    <p>{{  data.AccountNumber}}</p>
 
-    <label for="Branch"><b>Branch</b></label><br>
-        <p>{{data.Branch}}</p>
+        <h3>Deposit</h3>
+        <label for="Account Numnber"><b>Account Number</b></label><br>
+        <p>{{  data.AccountNumber}}</p>
+
+        <label for="Branch"><b>Branch</b></label><br>
+        <p>{{datas.Branch}}</p>
 
         <label for="Amount"><b>Amount</b></label><br>
         <input type="text" placeholder="amount" name="amount" ><br> 
-        <button type="submit">deposit</button>
+        <button type="submit">Deposit</button>
     </form>
 </div>
-
-
-
-
-
-
+<style>
+    .container{
+        background-color: #87b4a6;
+        width:400px;
+        height:500px; 
+        padding-top:40px;
+        font-size:larger;
+        margin-top:30px;
+        margin-left: 30px;
+        border-radius: 20px; 
+    }
+    h3{
+        font-weight: bolder;
+        margin-bottom:30px;
+        color: black;
+        text-align: center;
+   
+    }
+    input[type="text"]{
+        padding: 5px;
+        width: 50%; 
+        background-color: transparent;
+        border-top-color:transparent ;
+        border-left-color: transparent;
+        border-right-color:transparent ;
+        border-radius: 5px;
+      
+    }
+    button {
+        padding: auto;
+        width: 100px; 
+        text-align: center;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 20px;
+        border-bottom:2px;
+        background-color: #D9D9D9;
+        margin-top:50px;
+        margin-left :120px;
+    }
+</style>
 {% endblock %}

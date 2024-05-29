@@ -1,8 +1,10 @@
 {% extends 'user/home.html' %}
 {% block content %}
-    </div>
+    <div class="container">
+        <div class="center">
         <label for="Available Balance"><b>Available Balance</b></label>
         <p>{{ data1.InitialAmount}}</p>
+        </div>
         <label for="BankName"><b>BankName</b></label>
         <p>{{ data.first_name}}</p>
         <label for="Branch"><b>Branch</b></label>
@@ -10,4 +12,21 @@
         <label for="IFSC CODE"><b>IFSC CODE</b></label>
         <p>{{ data.Ifsc}} </p>
     </div>
+    <style>
+        .center{
+            padding-top:30px ;
+            text-align: center;
+        }
+        .container{
+            background-color: #87b4a6;
+            width:400px;
+            height:500px; 
+            font-size:larger;
+            text-align:start;
+            margin-top: 30px;
+            margin-left: 30px;
+            border-radius: 20px;
+            align-content: baseline;
+          }
+    </style>
 {% endblock %}

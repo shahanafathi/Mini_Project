@@ -26,7 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.index,name='index'),
     path('Login',views.Login,name='Login'),
-    
+   
     
     
     path('register',views.register,name='register'),
@@ -49,7 +49,9 @@ urlpatterns = [
     path('search', views.search, name='search'),
     path('all', views.all, name='all'),
     
-    
+    #### admin......
+    # path('admregstr',views.admregstr,name='admregstr'),
+    path('admregstr', views.admregstr, name='admregstr'),
  
  ]
 

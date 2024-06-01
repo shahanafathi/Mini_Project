@@ -51,9 +51,9 @@ urlpatterns = [
     
     #### admin......
     # path('admregstr',views.admregstr,name='admregstr'),
-    path('admregstr', views.admregstr, name='admregstr'),
- 
- ]
+    path('admin_home', views.admin_home, name='admin_home'),
+    path('admin_profile', views.admin_profile, name='admin_profile'),
+    ]
 
 
 if settings.DEBUG:

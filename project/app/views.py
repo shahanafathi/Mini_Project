@@ -24,7 +24,7 @@ def Login(request):
         admin_user = authenticate(request, username=username, password=password)
         if admin_user is not None and admin_user.is_staff:
             login(request, admin_user)
-            return redirect(reverse('admin:index'))  # Redirect to the admin dashboard
+            return redirect(admin_profile)  # Redirect to the admin dashboard
         elif user is not None:
             # If not an admin, check regular users
             login(request, user)
@@ -182,9 +182,9 @@ def viewuser(request):
     
 def search(request):
     if request.method=='POST':
-        search=request.POST['search']
-        users = CustomeUser.objects.filter(usertype='user',first_name=search)
-        return render(request,'bank/viewusers.html',{'users': users})
+        Search=request.POST['search']
+        user = CustomeUser.objects.filter(usertype='user',first_name__icontains=Search)
+        return render(request,'bank/viewusers.html',{'users': user})
     else:
         return redirect(viewuser)
     
@@ -209,94 +209,27 @@ def logout(request):
 # Admin.............................................
 
 
-def admregstr(request):
-    if request.method=='POST':
-        name=request.POST['name'] 
-        Username=request.POST['UserName']
-        Email=request.POST['Email']
-        Address=request.POST['Address']
-        pincode=request.POST['pincode']
-        Password=request.POST['Password']
-        ifsc=request.POST['ifsc']
-        branch=request.POST['branch']
-        data1=CustomeUser.objects.create_user(first_name=name,email=Email,Ifsc=ifsc,Branch=branch,Address=Address,Pincode=pincode,username=Username,password=Password,usertype='admin')
-        data1.save()
-        return redirect(Login)
-    else:
-        return render(request,'admin/bankreg.html')
-        # return HttpResponse('sucess')
-
-
-
-# def admregstr(request):
-#     if request.method == 'POST':
-#         name = request.POST['name']
-#         username = request.POST['UserName']
-#         email = request.POST['Email']
-#         address = request.POST['Address']
-#         pincode = request.POST['pincode']
-#         password = request.POST['Password']
-#         ifsc = request.POST['ifsc']
-#         branch = request.POST['branch']
-        
-#         CustomUser = get_user_model()
-#         data1 = CustomUser.objects.create_user(
-#             first_name=name,
-#             email=email,
-#             Ifsc=ifsc,
-#             Branch=branch,
-#             Address=address,
-#             Pincode=pincode,
-#             username=username,
-#             password=password,
-#             usertype='admin'
-#         )
-#         data1.save()
-#         return redirect('login') 
-#     else:
-#         # return render(request, 'admin/bankreg.html')
-#         return HttpResponse('sucess')
-
-
-def admregstr(request):
-    if request.method == 'POST':
-        Username = request.POST['UserName']
-        Email = request.POST['Email']
-        
-        if CustomeUser.objects.filter(username=Username).exists():
-            return render(request, 'admin/bankreg.html', {'error': 'Username already exists'})
-        if CustomeUser.objects.filter(email=Email).exists():
-            return render(request, 'admin/bankreg.html', {'error': 'Email already exists'})
-        
+def admin_home(request):
+    if request.method == "POST":
         name = request.POST['name']
-        age = request.POST['Age']
-        Image = request.FILES.get('Image')
-        AccountNumber = request.POST['AccountNumber']
-        dob = request.POST['DOB']
-        Address = request.POST['Address']
-        pincode = request.POST['Pincode']
-        Pancardno = request.POST['Pancardno']
-        Adharnumber = request.POST['AdharNumber']
-        Phonenumber = request.POST['Phonenumber']
-        InitialAmount = request.POST.get('InitialAmount', 0)  # Default to 0 if not provided
-        
-        data1 = CustomeUser.objects.create_user(
-            first_name=name,
-            age=age,
-            email=Email,
-            Image=Image,
-            AccountNumber=AccountNumber,
-            DOB=dob,
-            Address=Address,
-            Pincode=pincode,
-            Pancardno=Pancardno,
-            AdharNumber=Adharnumber,
-            Phonenumber=Phonenumber,
-            InitialAmount=InitialAmount,
-            username=Username,
-            password=request.POST['Password'],
-            usertype='admin'
-        )
-        data1.save()
-        return redirect('login')
-    return render(request, 'admin/bankreg.html')
+        Branch =  request.POST['branch']
+        ifsc = request.POST['ifsc']
+        Pincode = request.POST['pincode']
+        Username = request.POST['UserName']
+        if CustomeUser.objects.filter(first_name=name).exists():
+            return render(request,'admin/adminregstr.html',{'error':"bank already exist"})
+        Password = request.POST['Password']
+        if CustomeUser.objects.filter(first_name=name).exists():
+            return render(request,'admin/adminregstr.html',{'error':"bank already exist"})
+        data= CustomeUser.objects.create_user(first_name=name,Branch=Branch,Ifsc=ifsc,Pincode=Pincode,username=Username,password=Password,usertype="bank")
+        data.save()
+        return redirect(admin_profile)
+    else: 
+        return render(request,'admin/adminregstr.html')
+    
+    
+def admin_profile(request):
+    datas=CustomeUser.objects.filter(usertype='bank')
+    print(datas)
+    return render(request,'admin/viewbank.html',{'data':datas})
+

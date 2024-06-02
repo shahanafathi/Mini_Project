@@ -101,23 +101,24 @@ def userprofile(request):
     return render(request,'user/profile.html',{'data':usr})
 
 def profileedit(request,id):
-    data1=CustomeUser.objects.get(id=request.user.id)
+    datas=CustomeUser.objects.get(id=request.user.id)
     if request.method == 'POST':
-        data1.first_name=request.POST['Name']
-        data1.age=request.POST['age']
-        data1.Phonenumber=request.POST['Phonenumber']
-        data1.DOB=request.POST['DOB']
-        data1.Address=request.POST['Address']
-        data1.email=request.POST['Email']  
-        data1.username=request.POST['UserName']
-        data1.Pancardno=request.POST['Pancardno']
-        data1.AdharNumber=request.POST['AdharNumber']
+        datas.first_name=request.POST['Name']
+        datas.age=request.POST['age']
+        datas.Phonenumber=request.POST['Phonenumber']
+        datas.DOB=request.POST['DOB']
+        datas.Address=request.POST['Address']
+        datas.email=request.POST['Email']  
+        datas.username=request.POST['UserName']
+        datas.Pancardno=request.POST['Pancardno']
+        datas.AdharNumber=request.POST['AdharNumber']
         if 'Image' in request.FILES:
-            data1.Image = request.FILES['Image']
-        data1.save()
+            datas.Image = request.FILES['Image']
+        datas.save()
         return redirect(userprofile)
     else:
-        return render(request,'user/profileedit.html',{'datas':data1})
+        print(f"Debug: DOB - {datas.DOB}")
+        return render(request,'user/profileedit.html',{'datas':datas})
     
 def userhome1(request):
     data=CustomeUser.objects.get(usertype='bank')

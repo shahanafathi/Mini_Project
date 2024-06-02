@@ -13,7 +13,7 @@
                   <label for="Email"><b>Email</b></label><br>
                   <input type="email" placeholder="Email" name="Email" value="{{ datas.email }}"><br>
 
-                  <label for="Address"><b><Address></Address></b></label><br>
+                  <label for="Address"><b>Address</b></label><br>
                   <textarea id="Address" name="Address" rows="3" cols="18" >{{datas.Address}}</textarea><br>
 
                   <label for="Age"><b>Age</b></label><br>
@@ -25,8 +25,15 @@
             <div class="col-sm-6 " >
                 <label for="UserName"><b>UserName</b></label><br>
                 <input type="text" placeholder="UserName" name="UserName" value="{{datas.username}}" ><br>
-                <label for="DOB"><b>DOB</b></label><br>
-                <input type="date" placeholder="DOB" id="DOB" name='DOB' value="{{datas.DOB}}"><br>
+               
+               
+                <!-- <label for="DOB"><b>DOB</b></label><br>
+                <input type="date" placeholder="DOB"  name='DOB' value="{{datas.DOB}}"><br> -->
+
+                
+                <label for="Phone number"><b>DOB</b></label><br>
+                <input type="date" placeholder="DOB" name="DOB" value="{{datas.DOB|date:'Y-m-d'}}"><br>
+
                 <label for="Phone number"><b>Phone number</b></label><br>
                 <input type="tel" placeholder="Phone number"  name='Phonenumber' value="{{datas.Phonenumber}}"><br>
                 <label for="Pancard no"><b>Pancard no</b></label><br>

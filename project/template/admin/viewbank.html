@@ -87,7 +87,11 @@
         
         <ul>     
             <li>
+            {% if data %}
+            
+            {% else %}
             <a href="{% url 'admin_home' %}">Register</a>
+            {% endif %}
             </li>
             <li>
             <a href="{% url 'logout' %}"><b><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">

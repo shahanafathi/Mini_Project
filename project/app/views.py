@@ -125,36 +125,63 @@ def userhome1(request):
     data1=CustomeUser.objects.get(id=request.user.id)
     return render(request,'user/home1.html',{'data':data,'data1':data1})
 
+
 def deposite(request):
     data = CustomeUser.objects.get(id=request.user.id)
     if request.method=='POST':
-        amount = request.POST['amount']
-        data.InitialAmount+=int(amount)
-        data.save()
-        a = transaction.objects.create(user_id=data,details='Deposit', amount=amount,balance=data.InitialAmount)
-        a.save()
-        return redirect(userhome)
+        # AccountNumber = int(request.POST["AccountNumber"])
+        amount =  int(request.POST['amount'])
+        if amount<100:
+            data1=CustomeUser.objects.get(usertype='bank')
+            return render(request,'user/deposit.html',{'error':'amount required more than 100','data':data,'datas':data1})
+        # if data1.AccountNumber == AccountNumber:
+        #           data1=CustomeUser.objects.get(id=request.user.id)
+        #           return render(request,'user/deposit.html',{'Deposite Issue':"incorrect a/c number"})
+       
+        else:
+
+            data.InitialAmount+=int(amount)
+            data.save()
+            a = transaction.objects.create(user_id=data,details='Deposit', amount=amount,balance=data.InitialAmount)
+            a.save()
+            data1=CustomeUser.objects.get(usertype='bank')
+            return render(request,'user/deposit.html',{'Deposited':'Amount Deposited','data':data,'datas':data1})
     else:
         data1=CustomeUser.objects.get(usertype='bank')
         return render(request,'user/deposit.html',{'data':data,'datas':data1})
-    
+
+
 def withdraw(request):
     datas=CustomeUser.objects.get(usertype='bank')
     data1=CustomeUser.objects.get(id=request.user.id)
     if request.method=='POST':
+
+        # AccountNumber = int(request.POST["AccountNumber"])
+        
         amount = int(request.POST.get('amount')) 
         # if amount<=0:
         #     return HttpResponse('invalid')
         if data1.InitialAmount <= amount or data1.InitialAmount-amount<1000:
             context={'message':'insufficient balance'}
-            return render(request,'user/withdraw.html',context)
-        data1.InitialAmount-=amount
-        data1.save()
-        a=transaction.objects.create(user_id=data1,details='Withdrawel',amount=amount,balance=data1.InitialAmount)
-        a.save()
-        return redirect(userhome)
+            return render(request,'user/withdraw.html',{'context':'insufficient balance','data':data1,'datas':datas})
+        if amount < 200:
+                return render(request,'user/withdraw.html',{'error':"Can't withdraw money,minimum  200rs amount required",'data':data1,'datas':datas})
+        
+        # if data1.AccountNumber == AccountNumber:
+        #           data1=CustomeUser.objects.get(id=request.user.id)
+        #           return render(request,'user/withdraw.html',{'Withdraw Issue':"incorrect a/c number"})
+        else:
+            data1.InitialAmount-=amount
+            data1.save()
+            a=transaction.objects.create(user_id=data1,details='Withdrawel',amount=amount,balance=data1.InitialAmount)
+            a.save()
+            return render(request,'user/withdraw.html',{'Withdrawel':'Amount Withdrawed','data':data1,'datas':datas})
     else:
+        datas=CustomeUser.objects.get(usertype='bank')
         return render(request,'user/withdraw.html',{'data':data1,'datas':datas})
+    
+    
+        # ...////....end......
     
 def viewhistory(request):
     datas = transaction.objects.filter(user_id=request.user.id)

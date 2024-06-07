@@ -11,32 +11,56 @@
         <label for="Branch"><b>Branch</b></label><br>
         <p>{{datas.Branch}}</p>
 
+        <label for="Available Balance"><b>Available Balance</b></label>
+          <p>{{ data.InitialAmount}}</p>
+
         <label for="Amount"><b>Amount</b></label><br>
         <input type="text" placeholder="amount" name="amount" ><br> 
         <button type="submit">Deposit</button>
+        <!-- <button type="button" ><a href="{% url 'deposite' %}">Back</a></button> -->
+
+        <div class="row d-flex">
+            <h5 class="col-sm-12">{{ error }}</h5>
+            <h5 class="col-sm-12">{{ Deposited }}</h5>  
+        </div>
+        
+           
+          
+        
     </form>
+
 </div>
 <style>
     .container{
         background-color: #87b4a6;
         width:400px;
-        height:500px; 
+        height:auto; 
         padding-top:40px;
         font-size:larger;
         margin-top:30px;
         margin-left: 30px;
+        margin-right:30px;
         border-radius: 20px; 
     }
     h3{
-        font-weight: bolder;
+        font-weight: bold;
         margin-bottom:30px;
+        color: black;
+        text-align: center;
+   
+    }
+
+    h5{
+        font-weight: bolder;
+        padding-bottom:20px;
+        padding-top:10px;
         color: black;
         text-align: center;
    
     }
     input[type="text"]{
         padding: 5px;
-        width: 50%; 
+        width: auto; 
         background-color: transparent;
         border-top-color:transparent ;
         border-left-color: transparent;
@@ -53,7 +77,8 @@
         border-radius: 20px;
         border-bottom:2px;
         background-color: #D9D9D9;
-        margin-top:50px;
+        margin-top:30px;
+        margin-bottom:10px;
         margin-left :120px;
     }
 </style>

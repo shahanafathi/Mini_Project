@@ -6,7 +6,7 @@ class CustomeUser(AbstractUser):
     age=models.IntegerField(null=True,blank=True)
     Phonenumber=models.IntegerField(null=True,blank=True,unique=True)
     Address=models.CharField(null=True,blank=True,max_length=100)
-    DOB=models.DateField()
+    DOB=models.DateField(null=True,blank=True)
     InitialAmount=models.IntegerField(null=True,blank=True)
     AccountNumber=models.CharField(null=True,blank=True,max_length=100,unique=True)
     Pancardno=models.CharField(null=True,blank=True,max_length=100,unique=True)

@@ -129,7 +129,6 @@ def userhome1(request):
 def deposite(request):
     data = CustomeUser.objects.get(id=request.user.id)
     if request.method=='POST':
-        # AccountNumber = int(request.POST["AccountNumber"])
         amount =  int(request.POST['amount'])
         if amount<100:
             data1=CustomeUser.objects.get(usertype='bank')
@@ -164,7 +163,7 @@ def withdraw(request):
         if data1.InitialAmount <= amount or data1.InitialAmount-amount<1000:
             context={'message':'insufficient balance'}
             return render(request,'user/withdraw.html',{'context':'insufficient balance','data':data1,'datas':datas})
-        if amount < 200:
+        if amount < 100:
                 return render(request,'user/withdraw.html',{'error':"Can't withdraw money,minimum  200rs amount required",'data':data1,'datas':datas})
         
         # if data1.AccountNumber == AccountNumber:

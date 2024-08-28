@@ -19,12 +19,13 @@ def Login(request):
         password = request.POST['password']
         user = authenticate(username=username, password=password)
          # Authenticate superusers (admins)
-         
+        print(user)
          
         admin_user = authenticate(request, username=username, password=password)
         if admin_user is not None and admin_user.is_staff:
             login(request, admin_user)
-            return redirect(admin_profile)  # Redirect to the admin dashboard
+             # Authenticate superusers (admins)
+            # return redirect(admin_profile)  # Redirect to the admin dashboard
         elif user is not None:
             # If not an admin, check regular users
             login(request, user)
@@ -32,9 +33,9 @@ def Login(request):
                 return redirect(userhome)
             elif user.usertype == "bank":   #agency profile
                 return redirect(bankhome)
-            # elif user.usertype=="admin":
-            #    return HttpResponse('homepage sucess')
-            return render(request, 'login.html', context)
+            elif user.usertype=="admin":
+                return HttpResponse('homepage sucess')
+            #return render(request, 'login.html', context)
         else:
             context = {
                 'message': "Invalid credentials"
